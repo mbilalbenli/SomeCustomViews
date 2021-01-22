@@ -1,0 +1,139 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;</TargetFrameworks>
+    <AssemblyName>Plugin.SomeCustomViews</AssemblyName>
+    <RootNamespace>Plugin.SomeCustomViews</RootNamespace>
+    <PackageId>Plugin.SomeCustomViews</PackageId>
+    
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <!--<AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <Version>1.0.0.1</Version>
+    <PackageVersion>1.0.0.0</PackageVersion>-->
+    <PackOnBuild>true</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <LangVersion>latest</LangVersion>
+    <DebugType>portable</DebugType>
+    
+    <!--TODO: Fill these in-->
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageReleaseNotes>now includes six-digit verification view</PackageReleaseNotes>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, SomeCustomViews</PackageTags>
+    
+    <Title>SomeCustomViews Plugin for Xamarin and Windows</Title>
+    <Summary>Summary of nuget</Summary>
+    <Description>Small plugin for some custom views...</Description>
+    
+    
+    <Owners>YOU</Owners>
+    <Authors>M. Bilal Benli</Authors>
+    <Copyright>2021</Copyright>
+
+    <!--When built in 2019 will remove extra references on pack-->
+    <DisableExtraReferences>true</DisableExtraReferences>
+    <Company>MBBe</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>mbbeLogo.png</PackageIcon>
+    <Version>1.0.0.1</Version>
+    
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>1701;MSB4011;vsx1000;CS2002</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+  	<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.0" PrivateAssets="All" />
+  	<Compile Include="Shared\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  </ItemGroup>
+	
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+	  <Compile Include="Shared\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+  	<Compile Include="Platforms\Android\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+  	<Compile Include="Platforms\iOS\**\*.cs" />
+  </ItemGroup>
+
+
+  
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  	<Compile Include="Platforms\Android\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+  	<Compile Include="Platforms\iOS\**\*.cs" />
+  </ItemGroup>-->
+
+
+  <ItemGroup>
+    <EmbeddedResource Update="Shared\Views\VerifView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\XamApp\mbbeLogo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <!--Additional item groups-->
+  <!--
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+    <Compile Include="**\*.tvos.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
+    <Compile Include="**\*.watchos.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+    <Compile Include="**\*.mac.cs" />
+  </ItemGroup>
+
+  
+   <ItemGroup Condition=" $(TargetFramework.StartsWith('netcoreapp')) ">
+    <Compile Include="**\*.netcore.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Tizen')) ">
+    <Compile Include="**\*.tizen.cs" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net45')) ">
+    <Compile Include="**\*.dotnet.cs" />
+  </ItemGroup>
+  -->
+</Project>

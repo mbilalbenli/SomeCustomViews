@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:customControls="clr-namespace:Plugin.SomeCustomViews.Shared.Controls"
+      x:Class="Plugin.SomeCustomViews.Shared.Views.VerifView"      
+      x:Name="this" ColumnSpacing="0" ColumnDefinitions="10*,10*,10*,2*,10*,10*,10*">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Style TargetType="customControls:AdvancedEntry" ApplyToDerivedTypes="True">
+                <Setter Property="MaxLength" Value="1"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="FontSize" Value="{Binding FontSize,Source={x:Reference this}}"/>
+                <Setter Property="CornerRadius" Value="{Binding CornerRadius, Source={x:Reference this}}"/>
+                <Setter Property="BorderColor" Value="{Binding BorderColor, Source={x:Reference this}}"/>
+                <Setter Property="BorderThickness" Value="{Binding Thickness, Source={x:Reference this}}"/>
+                <Setter Property="TextColor" Value="{Binding TextColor, Source={x:Reference this}}"/>
+                <Setter Property="FontFamily" Value="{Binding FontFamily,Source={x:Reference this}}"/>
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+
+    <customControls:AdvancedEntry Grid.Column="0" TextChanged="Entry_TextChanged" x:Name="e1" AutomationId="1" OnBackspace="Entry_OnBackSpace" />
+
+    <customControls:AdvancedEntry Grid.Column="1" TextChanged="Entry_TextChanged" x:Name="e2" AutomationId="2" OnBackspace="Entry_OnBackSpace" />
+
+    <customControls:AdvancedEntry Grid.Column="2" TextChanged="Entry_TextChanged" x:Name="e3" AutomationId="3" OnBackspace="Entry_OnBackSpace" />
+
+    <customControls:AdvancedEntry Grid.Column="4" TextChanged="Entry_TextChanged" x:Name="e4" AutomationId="4" OnBackspace="Entry_OnBackSpace" />
+
+    <customControls:AdvancedEntry Grid.Column="5" TextChanged="Entry_TextChanged" x:Name="e5" AutomationId="5" OnBackspace="Entry_OnBackSpace" />
+
+    <customControls:AdvancedEntry Grid.Column="6" TextChanged="Entry_TextChanged" x:Name="e6" AutomationId="6" OnBackspace="Entry_OnBackSpace" />
+
+</Grid>
