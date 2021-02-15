@@ -16,7 +16,7 @@ namespace Plugin.SomeCustomViews.Platforms.Android
 
         public AdvancedEntryRenderer(Context context) : base(context)
         {
-
+            
         }
 
         public override bool DispatchKeyEvent(KeyEvent e)
@@ -46,7 +46,7 @@ namespace Plugin.SomeCustomViews.Platforms.Android
         protected override FormsEditText CreateNativeControl()
         {
             var control = base.CreateNativeControl();
-
+           
             UpdateView(control);
             return control;
         }
@@ -54,6 +54,7 @@ namespace Plugin.SomeCustomViews.Platforms.Android
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (Control == null) return;
+
 
             if (e.PropertyName == AdvancedEntry.CornerRadiusProperty.PropertyName)
             {
@@ -67,10 +68,13 @@ namespace Plugin.SomeCustomViews.Platforms.Android
             {
                 UpdateBackground();
             }
+            else if (e.PropertyName==AdvancedEntry.UnderLineColorProperty.PropertyName)
+            {
+                UpdateBackground();
+            }
 
             base.OnElementPropertyChanged(sender, e);
         }
-
 
         protected override void UpdateBackgroundColor()
         {
@@ -85,13 +89,19 @@ namespace Plugin.SomeCustomViews.Platforms.Android
             gradientDrawable.SetColor(ElementV2.BackgroundColor.ToAndroid());
             gradientDrawable.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
             gradientDrawable.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
-            control.SetBackground(gradientDrawable);
+            control.SetBackground(gradientDrawable);            
 
             var padTop = (int)Context.ToPixels(ElementV2.Padding.Top);
             var padBottom = (int)Context.ToPixels(ElementV2.Padding.Bottom);
             var padLeft = (int)Context.ToPixels(ElementV2.Padding.Left);
             var padRight = (int)Context.ToPixels(ElementV2.Padding.Right);
             control.SetPadding(padLeft, padTop, padRight, padBottom);
+            control.SetHintTextColor(ElementV2.UnderLineColor.ToAndroid());
+
+            control.SetHighlightColor(ElementV2.UnderLineColor.ToAndroid());
+            control.SetLinkTextColor(ElementV2.UnderLineColor.ToAndroid());
+            control.SetOutlineAmbientShadowColor(ElementV2.UnderLineColor.ToAndroid());
+            control.SetOutlineSpotShadowColor(ElementV2.UnderLineColor.ToAndroid());
         }
 
         protected void UpdateView()

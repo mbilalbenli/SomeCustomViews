@@ -62,6 +62,21 @@ namespace Plugin.SomeCustomViews.Shared.Controls
             set => SetValue(BorderColorProperty, value);
         }
 
+        public static BindableProperty UnderLineColorProperty = BindableProperty.Create(nameof(UnderLineColor), typeof(Color), typeof(AdvancedEntry), Color.Transparent);
+
+        public Color UnderLineColor
+        {
+            get => (Color)GetValue(UnderLineColorProperty);
+            set => SetValue(UnderLineColorProperty, value);
+        }
+
+        //public static BindableProperty UnderLineProperty = BindableProperty.Create(nameof(UnderLineColor), typeof(Color), typeof(AdvancedEntry), Color.Transparent);
+        //public Color UnderLineColor
+        //{
+        //    get => (Color)GetValue(UnderLineProperty);
+        //    set => SetValue(UnderLineProperty, value);
+        //}
+
         #endregion
     }
 }

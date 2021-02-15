@@ -9,166 +9,72 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(AdvancedEntry), typeof(AdvancedEntryRenderers))]
+
+[assembly: ExportRenderer(typeof(AdvancedEntry), typeof(AdvancedEntryRenderer))]
 namespace Plugin.SomeCustomViews.Platforms.iOS
 {
-    public class AdvancedEntryRenderers : EntryRenderer
+    public class AdvancedEntryRenderer : EntryRenderer, IUITextFieldDelegate
     {
-        public AdvancedEntry ElementV2 => Element as AdvancedEntry;
-        public UITextFieldCustomize ControlV2 => Control as UITextFieldCustomize;
-        public IElementController ElementController => Element as IElementController;
-
-        protected override UITextField CreateNativeControl()
-        {
-            UITextFieldCustomize control = new UITextFieldCustomize(RectangleF.Empty)
-            {
-                Padding = ElementV2.Padding,
-                BorderStyle = UITextBorderStyle.RoundedRect,
-                ClipsToBounds = true
-            };
-
-            UpdateView(control);
-
-            return control;
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
-            if (Element == null) return;
+            if (Element == null)
+            {
+                return;
+            }
 
-            BackspaceDetectHandler((AdvancedEntry)Element);
+            BackspaceDetectHandler(Element);
+
+
+            //SetNativeControl(textField);
 
             base.OnElementChanged(e);
         }
 
-        protected void UpdateView(UITextFieldCustomize control)
+        private void BackspaceDetectHandler(Entry element)
         {
-            if (control == null) return;
-
-            control.Layer.CornerRadius = ElementV2.CornerRadius;
-            control.Layer.BorderWidth = ElementV2.BorderThickness;
-            control.Layer.BorderColor = ElementV2.BorderColor.ToCGColor();
-
-        }
-
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == AdvancedEntry.PaddingProperty.PropertyName)
-            {
-                UpdatePadding();
-            }
-
-            base.OnElementPropertyChanged(sender, e);
-        }
-
-        protected void UpdatePadding()
-        {
-            if (Control == null) return;
-
-            ControlV2.Padding = ElementV2.Padding;
-        }
-
-        private void BackspaceDetectHandler(AdvancedEntry entry)
-        {
-            var textField = new UITextFieldCustomize();
+            var entry = (AdvancedEntry)element;
+            var textField = new CustomTextField();
 
             textField.EditingChanged += OnEditingChanged;
-            textField.OnDeleteBackward += (sender, i) =>
+            textField.OnDeleteBackwardKey += (sender, a) =>
             {
                 entry.OnBackspacePressed();
             };
-
-            SetNativeControl(textField);
         }
 
-        private void OnEditingChanged(object sender, EventArgs e)
+        IElementController ElementController => Element as IElementController;
+
+        void OnEditingChanged(object sender, EventArgs eventArgs)
         {
             ElementController.SetValueFromRenderer(Entry.TextProperty, Control.Text);
         }
+
     }
 
-    public class UITextFieldCustomize : UITextField
+
+    public class CustomTextField : UITextField
     {
+        // A delegate type for hooking up change notifications.
+        public delegate void DeleteBackwardKeyEventHandler(object sender, EventArgs e);
 
-        public delegate void DeleteBackwardEventHandler(object sender, EventArgs e);
+        // An event that clients can use to be notified whenever the
+        // elements of the list change.
+        public event DeleteBackwardKeyEventHandler OnDeleteBackwardKey;
 
-        public event DeleteBackwardEventHandler OnDeleteBackward;
 
-
-        private Thickness _padding = new Thickness(3);
-        public Thickness Padding
+        public void OnDeleteBackwardKeyPressed()
         {
-            get => _padding;
-            set
+            if (OnDeleteBackwardKey != null)
             {
-                if (_padding != value)
-                {
-                    _padding = value;
-                    //InvalidateIntrinsicContentSize();
-                }
-            }
-        }
-
-        public UITextFieldCustomize()
-        {
-
-        }
-        public UITextFieldCustomize(NSCoder coder) : base(coder)
-        {
-
-        }
-
-        public UITextFieldCustomize(CGRect rect) : base(rect)
-        {
-
-        }
-
-        public void OnDeleteBackwardPressed()
-        {
-            if (OnDeleteBackward != null)
-            {
-                OnDeleteBackward(null, null);
+                OnDeleteBackwardKey(null, null);
             }
         }
 
         public override void DeleteBackward()
         {
             base.DeleteBackward();
-            OnDeleteBackwardPressed();
+            OnDeleteBackwardKeyPressed();
+
         }
-
-        public override CGRect TextRect(CGRect forBounds)
-        {
-            var insets = new UIEdgeInsets(
-                (float)Padding.Top,
-                (float)Padding.Left,
-                (float)Padding.Bottom,
-                (float)Padding.Right);
-
-            return insets.InsetRect(forBounds);
-        }
-
-        public override CGRect PlaceholderRect(CGRect forBounds)
-        {
-            var insets = new UIEdgeInsets(
-                (float)Padding.Top,
-                (float)Padding.Left,
-                (float)Padding.Bottom,
-                (float)Padding.Right);
-
-            return insets.InsetRect(forBounds);
-        }
-
-        public override CGRect EditingRect(CGRect forBounds)
-        {
-            var insets = new UIEdgeInsets
-                ((float)Padding.Top,
-                (float)Padding.Left,
-                (float)Padding.Bottom,
-                (float)Padding.Right);
-
-            return insets.InsetRect(forBounds);
-        }
-
     }
 }

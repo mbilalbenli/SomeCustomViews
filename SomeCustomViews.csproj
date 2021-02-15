@@ -24,8 +24,8 @@
     
     <!--TODO: Fill these in-->
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://www.nuget.org/packages/Plugin.SomeCustomViews</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mbilalbenli/SomeCustomViews</RepositoryUrl>
     <PackageReleaseNotes>now includes six-digit verification view</PackageReleaseNotes>
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, SomeCustomViews</PackageTags>
@@ -44,7 +44,7 @@
     <Company>MBBe</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>mbbeLogo.png</PackageIcon>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.7</Version>
     
   </PropertyGroup>
 
@@ -60,6 +60,7 @@
 
   <ItemGroup>
   	<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.0" PrivateAssets="All" />
+  	<PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
   	<Compile Include="Shared\**\*.cs" />
   </ItemGroup>
   
@@ -70,16 +71,19 @@
   </ItemGroup>
 	
   <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
 	  <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
   	<Compile Include="Platforms\Android\**\*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+  	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
   	<Compile Include="Platforms\iOS\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Shared\Views\VerifyView.xaml.cs" />
   </ItemGroup>
 
 
@@ -95,6 +99,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Shared\Views\VerifView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Shared\Views\VerifyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
