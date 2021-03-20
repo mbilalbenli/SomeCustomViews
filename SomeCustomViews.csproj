@@ -7,10 +7,6 @@
     <PackageId>Plugin.SomeCustomViews</PackageId>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <!--<AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>1.0.0.1</Version>
-    <PackageVersion>1.0.0.0</PackageVersion>-->
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -44,7 +40,10 @@
     <Company>MBBe</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>mbbeLogo.png</PackageIcon>
-    <Version>1.0.0.7</Version>
+    <Version>1.0.1.3</Version>
+    <Configurations>Debug;Release;Simulante</Configurations>
+    <AssemblyVersion>1.0.1.3</AssemblyVersion>
+    <FileVersion>1.0.1.3</FileVersion>
     
   </PropertyGroup>
 
@@ -69,10 +68,13 @@
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
   </ItemGroup>
-	
+
   <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
   	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
 	  <Compile Include="Shared\**\*.cs" />
+	  <Compile Include="Shared\Views\**\*.cs" />
+	  <Compile Include="Shared\Controls\**\*.cs" />
+	  <Compile Include="Shared\Helpers\**\*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
   	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
@@ -82,10 +84,6 @@
   	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
   	<Compile Include="Platforms\iOS\**\*.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Shared\Views\VerifyView.xaml.cs" />
-  </ItemGroup>
-
 
   
   <!--<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
@@ -98,6 +96,15 @@
 
 
   <ItemGroup>
+    <EmbeddedResource Update="Shared\Views\FramedEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Shared\Views\FramlessEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Shared\Views\VerifCodeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Shared\Views\VerifView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -107,7 +114,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\XamApp\mbbeLogo.png">
+    <None Include="..\..\..\..\..\Some Files\images\mbbeLogo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

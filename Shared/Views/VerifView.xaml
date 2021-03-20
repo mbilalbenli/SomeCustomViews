@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControls="clr-namespace:Plugin.SomeCustomViews.Shared.Controls"
     x:Name="this"
-    ColumnDefinitions="10*,10*,10*,2*,10*,10*,10*"
+    ColumnDefinitions="10*,10*,10*,10*,10*,10*"
     ColumnSpacing="0">
 
     <Grid.Resources>
@@ -23,6 +23,7 @@
                 <Setter Property="BorderThickness" Value="{Binding Thickness, Source={x:Reference this}}" />
                 <Setter Property="TextColor" Value="{Binding TextColor, Source={x:Reference this}}" />
                 <Setter Property="FontFamily" Value="{Binding FontFamily, Source={x:Reference this}}" />
+                <Setter Property="BackgroundColor" Value="{Binding BoxBackgroundColor, Source={x:Reference this}}" />
             </Style>
         </ResourceDictionary>
     </Grid.Resources>
@@ -51,21 +52,21 @@
 
     <customControls:AdvancedEntry
         x:Name="e4"
-        Grid.Column="4"
+        Grid.Column="3"
         AutomationId="4"
         OnBackspace="Entry_OnBackSpace"
         TextChanged="Entry_TextChanged" />
 
     <customControls:AdvancedEntry
         x:Name="e5"
-        Grid.Column="5"
+        Grid.Column="4"
         AutomationId="5"
         OnBackspace="Entry_OnBackSpace"
         TextChanged="Entry_TextChanged" />
 
     <customControls:AdvancedEntry
         x:Name="e6"
-        Grid.Column="6"
+        Grid.Column="5"
         AutomationId="6"
         OnBackspace="Entry_OnBackSpace"
         TextChanged="Entry_TextChanged" />

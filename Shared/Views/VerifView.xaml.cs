@@ -69,6 +69,13 @@ namespace Plugin.SomeCustomViews.Shared.Views
             set => SetValue(TextColorProperty, value);
         }
 
+        public static readonly BindableProperty BoxBackgroundColorProperty = BindableProperty.Create(nameof(BoxBackgroundColor), typeof(Color), typeof(VerifView), Color.Transparent);
+        public Color BoxBackgroundColor
+        {
+            get => (Color)GetValue(BoxBackgroundColorProperty);
+            set => SetValue(BoxBackgroundColorProperty, value);
+        }
+
         public static readonly BindableProperty FrameSizeProperty = BindableProperty.Create(nameof(FrameSize), typeof(double), typeof(VerifView), 200.00);
         public double FrameSize
         {
@@ -144,7 +151,7 @@ namespace Plugin.SomeCustomViews.Shared.Views
 
             if (e.OldTextValue == null || e.OldTextValue == string.Empty)
             {
-                (this.FindByName("e" + (oldID + 1)) as Entry).Focus();
+                (this.FindByName("e" + (oldID + 1)) as Xamarin.Forms.Entry).Focus();
             }
             else if (e.NewTextValue == string.Empty)
             {

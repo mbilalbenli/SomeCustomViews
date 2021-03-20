@@ -85,23 +85,31 @@ namespace Plugin.SomeCustomViews.Platforms.Android
         {
             if (control == null) return;
 
-            GradientDrawable gradientDrawable = new GradientDrawable();
-            gradientDrawable.SetColor(ElementV2.BackgroundColor.ToAndroid());
-            gradientDrawable.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
-            gradientDrawable.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
-            control.SetBackground(gradientDrawable);            
+            try
+            {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.SetColor(ElementV2.BackgroundColor.ToAndroid());
+                gradientDrawable.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
+                gradientDrawable.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
+                control.SetBackground(gradientDrawable);
 
-            var padTop = (int)Context.ToPixels(ElementV2.Padding.Top);
-            var padBottom = (int)Context.ToPixels(ElementV2.Padding.Bottom);
-            var padLeft = (int)Context.ToPixels(ElementV2.Padding.Left);
-            var padRight = (int)Context.ToPixels(ElementV2.Padding.Right);
-            control.SetPadding(padLeft, padTop, padRight, padBottom);
-            control.SetHintTextColor(ElementV2.UnderLineColor.ToAndroid());
+                var padTop = (int)Context.ToPixels(ElementV2.Padding.Top);
+                var padBottom = (int)Context.ToPixels(ElementV2.Padding.Bottom);
+                var padLeft = (int)Context.ToPixels(ElementV2.Padding.Left);
+                var padRight = (int)Context.ToPixels(ElementV2.Padding.Right);
+                control.SetPadding(padLeft, padTop, padRight, padBottom);
+                control.SetHintTextColor(ElementV2.UnderLineColor.ToAndroid());
 
-            control.SetHighlightColor(ElementV2.UnderLineColor.ToAndroid());
-            control.SetLinkTextColor(ElementV2.UnderLineColor.ToAndroid());
-            control.SetOutlineAmbientShadowColor(ElementV2.UnderLineColor.ToAndroid());
-            control.SetOutlineSpotShadowColor(ElementV2.UnderLineColor.ToAndroid());
+                control.SetHighlightColor(ElementV2.UnderLineColor.ToAndroid());
+                control.SetLinkTextColor(ElementV2.UnderLineColor.ToAndroid());
+    
+                control.SetOutlineAmbientShadowColor(ElementV2.UnderLineColor.ToAndroid());
+                control.SetOutlineSpotShadowColor(ElementV2.UnderLineColor.ToAndroid());
+            }
+            catch (System.Exception)
+            {
+                
+            }
         }
 
         protected void UpdateView()

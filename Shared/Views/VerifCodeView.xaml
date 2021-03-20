@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Plugin.SomeCustomViews.Shared.Views.VerifCodeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <ContentView.Content>
+        <Grid
+            x:Name="MainGrid"
+            ColumnDefinitions="*,*,*,*,*,*"
+            ColumnSpacing="{Binding BoxSpacing, Source={x:Reference this}}}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Grid.Resources>
+                <Style ApplyToDerivedTypes="True" TargetType="Label">
+                    <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                    <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                    <Setter Property="VerticalTextAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="{Binding FontFamily, Source={x:Reference this}}" />
+                    <Setter Property="FontAttributes" Value="{Binding FontAttributes, Source={x:Reference this}}" />
+                    <Setter Property="FontSize" Value="{Binding FontSize, Source={x:Reference this}}" />
+                    <Setter Property="Text" Value="{Binding Text, Source={x:Reference this}}" />
+                    <Setter Property="TextColor" Value="{Binding TextColor, Source={x:Reference this}}" />
+                </Style>
+                <Style ApplyToDerivedTypes="True" TargetType="Frame">
+                    <Setter Property="BorderColor" Value="{Binding BorderColor, Source={x:Reference this}}" />
+                    <Setter Property="CornerRadius" Value="{Binding CornerRadius, Source={x:Reference this}}" />
+                    <Setter Property="HasShadow" Value="True" />
+                    <Setter Property="BackgroundColor" Value="{Binding BoxBackgroundColor, Source={x:Reference this}}" />
+                    <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                    <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="HeightRequest" Value="{Binding Size, Source={x:Reference this}}" />
+                    <Setter Property="WidthRequest" Value="{Binding Size, Source={x:Reference this}}" />
+                </Style>
+            </Grid.Resources>
+
+            <Entry
+                x:Name="codeEntry"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                IsVisible="true"
+                Keyboard="Numeric"
+                Scale="0.01"
+                TextChanged="Entry_TextChanged" />
+            <Frame
+                x:Name="FrameReferance"
+                Grid.Column="0"
+                AutomationId="1">
+                <Label x:Name="Digit1" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame Grid.Column="1" AutomationId="2">
+                <Label x:Name="Digit2" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame Grid.Column="2" AutomationId="3">
+                <Label x:Name="Digit3" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame Grid.Column="3" AutomationId="4">
+                <Label x:Name="Digit4" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame Grid.Column="4" AutomationId="5">
+                <Label x:Name="Digit5" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame Grid.Column="5" AutomationId="6">
+                <Label x:Name="Digit6" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>
